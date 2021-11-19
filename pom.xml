@@ -36,7 +36,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+	<dependency>
+	    <groupId>org.mariadb.jdbc</groupId>
+	    <artifactId>mariadb-java-client</artifactId>
+	    <version>3.0.0-alpha</version>
+	</dependency>
+
+		
 	</dependencies>
 
 	<build>
