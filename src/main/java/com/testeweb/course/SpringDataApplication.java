@@ -1,6 +1,6 @@
 package com.testeweb.course;
 
-import java.util.Locale;
+import java.util.Scanner;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,16 +10,20 @@ import com.testeweb.course.entities.Cargo;
 import com.testeweb.course.entities.Funcionario;
 import com.testeweb.course.repositories.CargoRepository;
 import com.testeweb.course.repositories.FuncionarioRepository;
+import com.testeweb.course.services.CrudCargoService;
 
 @SpringBootApplication
 public class SpringDataApplication implements CommandLineRunner {
-	
+	//declaração das variavies global
 	private final CargoRepository repository;
 	private final FuncionarioRepository funcionarioRepository;
+	private final CrudCargoService cargoService;
+	private final Boolean system = true; 
 	
-	public SpringDataApplication(CargoRepository repository,FuncionarioRepository funcionarioRepository) {
+	public SpringDataApplication(CargoRepository repository,FuncionarioRepository funcionarioRepository,CrudCargoService cargoService) {
 		this.repository = repository;
 		this.funcionarioRepository = funcionarioRepository;
+		this.cargoService = cargoService;
 	}
 	
 	public static void main(String[] args) {
@@ -28,8 +32,15 @@ public class SpringDataApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		Scanner scanner = new Scanner(System.in);
 		
-		// TODO Auto-generated method stub
+
+		//logica do algoritmo
+		while(system) {
+			System.out.println("qual ação voce deseja realizar: ");
+			System.out.println("0 - sair: ");
+		}
+		
 		Cargo cargo = new Cargo();
 		cargo.setDescricao("DESENVOLVEDOR DE SOFTWARE");
 		repository.save(cargo);
