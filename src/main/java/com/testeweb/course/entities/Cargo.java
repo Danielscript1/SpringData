@@ -1,52 +1,45 @@
 package com.testeweb.course.entities;
 
-import java.io.Serializable;
+
+
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tb_cargos")
-public class Cargo implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	/*
-	 * Basic entity checklist:
-	 Basic attributes
-	 Associations (instantiate collections)
-	 
-	 Getters & Setters (collections: only get)
-	 hashCode & equals
-	 Serializable
-	 * 
-	 * */
+@Table(name = "cargos")
+public class Cargo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	private String descricao;
+	@OneToMany(mappedBy = "cargo")
+	private List<Funcionario> funcionario;
 	
 	
-	//Constructors
+
 	public Cargo() {
 		
 	}
-
-	public Cargo(Long id, String descricao) {
+	
+	
+	public Cargo(Integer id, String descricao) {
 		this.id = id;
 		this.descricao = descricao;
 	}
-	// Getters & Setters (collections: only get)
-	public Long getId() {
+
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -58,11 +51,17 @@ public class Cargo implements Serializable {
 		this.descricao = descricao;
 	}
 
-	 //hashCode & equals
+	@Override
+	public String toString() {
+		return "Cargo [id=" + id + ", descricao=" + descricao + "]";
+	}
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -75,16 +74,5 @@ public class Cargo implements Serializable {
 		Cargo other = (Cargo) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

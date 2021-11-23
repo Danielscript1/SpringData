@@ -1,89 +1,62 @@
 package com.testeweb.course.entities;
 
-import java.io.Serializable;
-import java.sql.Date;
-import java.util.Objects;
+
+
+import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-@Entity
-@Table(name="tb_funcionarios")
-public class Funcionario implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	/*
-	 * Basic entity checklist:
-	 Basic attributes
-	 Associations (instantiate collections)
-	 Constructors
-	 Getters & Setters (collections: only get)
-	 hashCode & equals
-	 Serializable
-	 * 
-	 * */
-	//atributos
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+@Entity
+@Table(name = "tb_funcionarios")
+public class Funcionario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String name;
-	private String email;
-	private Date dataNascimento;
+	private Integer id;
+	private String nome;
 	private String cpf;
+	private Double salario;
+	private LocalDate dataContratacao;
+	@ManyToOne
+	@JoinColumn(name = "cargo_id")
+	private Cargo cargo;
 	
-	
-	
-	//Constructors
-	public Funcionario() {
-		
-	}
-
-	public Funcionario(Long id, String name, String email, Date dataNascimento, String cpf) {
+	public Funcionario(Integer id, String nome, String cpf, Double salario, LocalDate dataContratacao, Cargo cargo) {
 		super();
 		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.dataNascimento = dataNascimento;
+		this.nome = nome;
 		this.cpf = cpf;
-		
+		this.salario = salario;
+		this.dataContratacao = dataContratacao;
+		this.cargo = cargo;
 	}
-	
-	//Getters & Setters (collections: only get)
-	public Long getId() {
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getCpf() {
@@ -94,34 +67,35 @@ public class Funcionario implements Serializable {
 		this.cpf = cpf;
 	}
 
-
-	// hashCode & equals
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
+	public Double getSalario() {
+		return salario;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Funcionario other = (Funcionario) obj;
-		return Objects.equals(id, other.id);
+	public void setSalario(Double salario) {
+		this.salario = salario;
 	}
-	
+
+	public LocalDate getDataContratacao() {
+		return dataContratacao;
+	}
+
+	public void setDataContratacao(LocalDate dataContratacao) {
+		this.dataContratacao = dataContratacao;
+	}
+
+	public Cargo getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "Funcionario: " + "id:" + id + "| nome:'" + nome + "| cpf:" + cpf + "| salario:" + salario
+				+ "| dataContratacao:" + dataContratacao + "| cargo:" + cargo.getDescricao();
+	}
 }
