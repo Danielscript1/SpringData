@@ -18,7 +18,7 @@ public class CrudCargoService {
 	
 	//iniciar 
 	public void iniciar(Scanner scanner) {
-		
+		salvar(scanner);
 	}
 	//salvar
 	public void salvar(Scanner scanner) {

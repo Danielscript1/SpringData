@@ -11,21 +11,21 @@ import com.testeweb.course.entities.Funcionario;
 import com.testeweb.course.repositories.CargoRepository;
 import com.testeweb.course.repositories.FuncionarioRepository;
 import com.testeweb.course.services.CrudCargoService;
+import com.testeweb.course.services.CrudFuncionarioService;
 
 @SpringBootApplication
 public class SpringDataApplication implements CommandLineRunner {
 	//declaração das variavies global
-	private final CargoRepository repository;
-	private final FuncionarioRepository funcionarioRepository;
 	private final CrudCargoService cargoService;
-	private final Boolean system = true; 
+	private final CrudFuncionarioService funcionarioService;
+	private Boolean system = true;
 	
-	public SpringDataApplication(CargoRepository repository,FuncionarioRepository funcionarioRepository,CrudCargoService cargoService) {
-		this.repository = repository;
-		this.funcionarioRepository = funcionarioRepository;
+	//constructor
+	public SpringDataApplication(CrudCargoService cargoService,CrudFuncionarioService funcionarioService) {
 		this.cargoService = cargoService;
+		this.funcionarioService = funcionarioService;
 	}
-	
+	//rodar minha aplicação com minhas classes junto com springboot
 	public static void main(String[] args) {
 		SpringApplication.run(SpringDataApplication.class, args);
 	}
@@ -39,13 +39,28 @@ public class SpringDataApplication implements CommandLineRunner {
 		while(system) {
 			System.out.println("qual ação voce deseja realizar: ");
 			System.out.println("0 - sair: ");
+			System.out.println("1 - Cargo ");
+			System.out.println("2 - funcionario");
+			
+			//variavel de comparação
+			Integer function = scanner.nextInt();
+			switch(function){
+			case 1 :
+				
+				cargoService.iniciar(scanner);
+				break;
+			case 2 :
+				funcionarioService.iniciar(scanner);
+				break;
+				
+			default:
+				System.out.println("Finalizando...");
+				system = false;
+				break;
+			}
 		}
 		
-		Cargo cargo = new Cargo();
-		cargo.setDescricao("DESENVOLVEDOR DE SOFTWARE");
-		repository.save(cargo);
-		Funcionario func = new Funcionario(null, "Daniel sousa", "05439683365", 1.200, null, cargo);
-		funcionarioRepository.save(func);
+		
 		
 	}
 	
