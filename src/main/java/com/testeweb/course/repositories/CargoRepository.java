@@ -8,4 +8,6 @@ import com.testeweb.course.entities.Cargo;
 
 public interface CargoRepository extends  CrudRepository<Cargo, Integer> {
 
+
+
 }

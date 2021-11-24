@@ -47,7 +47,7 @@ public class SpringDataApplication implements CommandLineRunner {
 			switch(function){
 			case 1 :
 				
-				cargoService.iniciar(scanner);
+				cargoService.iniciar();
 				break;
 			case 2 :
 				funcionarioService.iniciar(scanner);
