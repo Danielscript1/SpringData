@@ -1,27 +1,30 @@
 package com.testeweb.course.services;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
+
+import org.springframework.stereotype.Service;
 
 import com.testeweb.course.entities.Cargo;
 import com.testeweb.course.entities.Funcionario;
 import com.testeweb.course.repositories.CargoRepository;
 import com.testeweb.course.repositories.FuncionarioRepository;
-
+@Service
 public class RelatorioService {
 	//declaração da variavel
 	private Boolean system = true;
+	private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	Scanner sc = new Scanner(System.in);
 	private final FuncionarioRepository funcionarioRepository;
-	Scanner sc = new Scanner (System.in); 
-	
-	
-	
 	
 	public RelatorioService(FuncionarioRepository funcionarioRepository) {
 		this.funcionarioRepository = funcionarioRepository;
 	}
-
 	
+
+
+
 
 	public void iniciar() {
 		
@@ -42,14 +45,19 @@ public class RelatorioService {
 			
 		}
 	}
-
+	//buscar por nome
 	public void buscar() {
-		System.out.println("Digite o nome do funcionario");
+		
+		System.out.println("Qual nome deseja pesquisar");
 		String nome = sc.next();
-		Iterable<Funcionario> funcionario = funcionarioRepository.findByNome(nome);
-		funcionario.forEach(cargo -> System.out.println(cargo));
+		List<Funcionario> list = funcionarioRepository.findByNome(nome);
+		list.forEach(System.out::println);
+
+
 		
 		
 	}
+	
+	
 	
 }
