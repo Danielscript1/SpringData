@@ -32,6 +32,20 @@ public class Funcionario {
 	@ManyToOne
 	@JoinColumn(name = "cargo_id")
 	private Cargo cargo;
+	//associação com unidade
+	/*
+	 *  Se “telefones” for declarado EAGER a lista de telefones,
+	 *  é carregada automaticamente ao fazer o “get” de Pessoa.
+		Se “telefones” for declarado LAZY, a lista de telefones,
+		só será carregada (implicando mais um select no banco) se ela for acessada.*/
+	@Fetch(FetchMode.SELECT) 
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "funcionarios_unidades", joinColumns = {
+			@JoinColumn(name = "fk_funcionario") }, 
+	inverseJoinColumns = { @JoinColumn(name = "fk_unidade") })
+	private List<UnidadeTrabalho> unidadeTrabalhos;
+
+
 	
 	public Funcionario(Integer id, String nome, String cpf, Double salario, LocalDate dataContratacao, Cargo cargo) {
 		super();
@@ -90,8 +104,12 @@ public class Funcionario {
 	public void setCargo(Cargo cargo) {
 		this.cargo = cargo;
 	}
-
 	
+	
+
+	public List<UnidadeTrabalho> getUnidadeTrabalhos() {
+		return unidadeTrabalhos;
+	}
 
 	@Override
 	public String toString() {
