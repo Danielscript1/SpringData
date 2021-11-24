@@ -56,6 +56,12 @@ public class Funcionario {
 		this.dataContratacao = dataContratacao;
 		this.cargo = cargo;
 	}
+	
+
+	public Funcionario() {
+		super();
+	}
+
 
 	public Integer getId() {
 		return id;

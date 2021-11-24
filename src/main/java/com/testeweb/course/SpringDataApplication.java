@@ -50,9 +50,9 @@ public class SpringDataApplication implements CommandLineRunner {
 				cargoService.iniciar();
 				break;
 			case 2 :
-				funcionarioService.iniciar(scanner);
+				funcionarioService.iniciar();
 				break;
-				
+		
 			default:
 				System.out.println("Finalizando...");
 				system = false;
