@@ -3,8 +3,13 @@ package com.testeweb.course.services;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.testeweb.course.entities.Cargo;
 import com.testeweb.course.entities.Funcionario;
 import com.testeweb.course.repositories.CargoRepository;
 import com.testeweb.course.repositories.FuncionarioRepository;
@@ -31,6 +36,7 @@ public class CrudFuncionarioService {
 			System.out.println("Qual acao de funcionario deseja executar");
 			System.out.println("0 - Sair");
 			System.out.println("1 - Salvar");
+			System.out.println("2 - visualizar");
 		
 			
 			int action = scanner.nextInt();
@@ -38,6 +44,9 @@ public class CrudFuncionarioService {
 			switch (action) {
 			case 1:
 				salvar(scanner);
+				break;
+			case 2: 
+				vizualizar(scanner);
 				break;
 			
 			default:
@@ -60,8 +69,19 @@ public class CrudFuncionarioService {
         funcionarioRepository.save(funcionario);
         System.out.println("Salvo");
 	}
-
-	
+   //paginação
+	public void vizualizar(Scanner scanner) {
+		System.out.println("qual pagina voce deseja consultar");
+		Integer page = scanner.nextInt();
+		Pageable pageable = PageRequest.of(page, 5, Sort.unsorted());
+		Page<Funcionario> funcionarios = funcionarioRepository.findAll(pageable);
+		//tamanho do de pagina
+		System.out.println(funcionarios);
+		System.out.println("pagina atual "+funcionarios.getNumber());
+		System.out.println("quantidade "+funcionarios.getTotalElements());
+		funcionarios.forEach(func -> System.out.println(func));
+		
+	}
 	
 	
 	

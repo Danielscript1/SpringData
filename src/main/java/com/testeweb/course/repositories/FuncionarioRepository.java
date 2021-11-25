@@ -5,10 +5,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.web.PageableArgumentResolver;
 
 import com.testeweb.course.entities.Funcionario;
-
-public interface FuncionarioRepository extends  CrudRepository<Funcionario, Integer>{
+//metodo de paginação -> para listar numeros desejados de arquivos
+public interface FuncionarioRepository extends  PagingAndSortingRepository<Funcionario, Integer>{
 	//listaFuncionario -> QueryCreate
 	List<Funcionario> findByNome(String nome);
 	
