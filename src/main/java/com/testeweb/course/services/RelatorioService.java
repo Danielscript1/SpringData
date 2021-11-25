@@ -1,6 +1,8 @@
 package com.testeweb.course.services;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -32,11 +34,15 @@ public class RelatorioService {
 			System.out.println("Qual ação você deseja executar!!");
 			System.out.println("0 - sair");
 			System.out.println("1 - buscar");
+			System.out.println("2 - buscar pensonalizada");
 			Integer function = sc.nextInt();
 			switch(function) {
 			case 1 :
 				
 				buscar();
+				break;
+			case 2 :
+				buscaFuncionarioNomeSalarioMaiorData();
 				break;
 			default:
 				system = false;
@@ -54,8 +60,19 @@ public class RelatorioService {
 		list.forEach(System.out::println);
 
 
-		
-		
+		}
+	//buscar pensonalizada buscaFuncionarioNomeSalarioMaiorData
+	public void buscaFuncionarioNomeSalarioMaiorData() {
+		System.out.println("Digite os filtros desejados");
+		System.out.println("nome ");
+		String nome = sc.next();
+		System.out.println("Data de contratação");
+		String dataContratacao = sc.next();
+		LocalDate localDate = LocalDate.parse(dataContratacao, formatter);
+		System.out.println("salario ");
+		Double salario = sc.nextDouble();
+		List<Funcionario> list = funcionarioRepository.findNomeSalarioMaiorDataContratacao(nome,salario,localDate);
+		list.forEach(System.out::println);
 	}
 	
 	

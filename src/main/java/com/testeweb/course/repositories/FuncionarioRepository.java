@@ -17,9 +17,8 @@ public interface FuncionarioRepository extends  CrudRepository<Funcionario, Inte
 	 *  a data de contratação e um salário maior do que o informado no filtro,
 	 *   deve-se retornar todos os funcionários que se encaixarem nessa filtragem.
 	 * */
-	@Query("select f"
-		+" from tb_funcionario  f where"
-		+ " f.nome = :nome AND f.salario >= :salario AND f.dataContratacao = :dataContratacao")
+	@Query("SELECT f FROM Funcionario f WHERE f.nome = :nome "
+			+ "AND f.salario >= :salario AND f.dataContratacao = :dataContratacao")
 	List<Funcionario> findNomeSalarioMaiorDataContratacao(String nome, Double salario, LocalDate dataContratacao);
 	
 }
