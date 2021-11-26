@@ -71,16 +71,16 @@ public class CrudFuncionarioService {
 	}
    //paginação
 	public void vizualizar(Scanner scanner) {
-		System.out.println("qual pagina voce deseja consultar");
+		System.out.println("Qual pagina voce deseja visualizar");
 		Integer page = scanner.nextInt();
-		Pageable pageable = PageRequest.of(page, 5, Sort.unsorted());
-		Page<Funcionario> funcionarios = funcionarioRepository.findAll(pageable);
-		//tamanho do de pagina
-		System.out.println(funcionarios);
-		System.out.println("pagina atual "+funcionarios.getNumber());
-		System.out.println("quantidade "+funcionarios.getTotalElements());
-		funcionarios.forEach(func -> System.out.println(func));
 		
+		Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.ASC, "nome"));
+		Page<Funcionario> funcionarios = funcionarioRepository.findAll(pageable);
+		
+		System.out.println(funcionarios);
+		System.out.println("Pagina atual " + funcionarios.getNumber());
+		System.out.println("Total elemento " + funcionarios.getTotalElements());
+		funcionarios.forEach(funcionario -> System.out.println(funcionario));
 	}
 	
 	
