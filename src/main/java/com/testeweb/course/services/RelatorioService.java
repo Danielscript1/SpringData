@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.testeweb.course.entities.Cargo;
 import com.testeweb.course.entities.Funcionario;
+import com.testeweb.course.entities.FuncionarioProjecao;
 import com.testeweb.course.repositories.CargoRepository;
 import com.testeweb.course.repositories.FuncionarioRepository;
 @Service
@@ -35,6 +36,7 @@ public class RelatorioService {
 			System.out.println("0 - sair");
 			System.out.println("1 - buscar");
 			System.out.println("2 - buscar pensonalizada");
+			System.out.println("3 - buscar pesquis funcionario salario");
 			Integer function = sc.nextInt();
 			switch(function) {
 			case 1 :
@@ -43,6 +45,9 @@ public class RelatorioService {
 				break;
 			case 2 :
 				buscaFuncionarioNomeSalarioMaiorData();
+				break;
+			case 3:
+				pesquisarFuncionarioSalario();
 				break;
 			default:
 				system = false;
@@ -75,6 +80,11 @@ public class RelatorioService {
 		list.forEach(System.out::println);
 	}
 	
+	//projeção de buscar - customizada
+	public void pesquisarFuncionarioSalario() {
+		List<FuncionarioProjecao> list = funcionarioRepository.findFuncionaroSalario();
+		list.forEach(f -> System.out.println("funcionario: "+f.getId()+", nome: "+f.getNome()+", salario "+f.getSalario() ));
+	}
 	
 	
 }
