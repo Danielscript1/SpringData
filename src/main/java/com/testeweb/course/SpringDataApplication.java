@@ -12,6 +12,7 @@ import com.testeweb.course.repositories.CargoRepository;
 import com.testeweb.course.repositories.FuncionarioRepository;
 import com.testeweb.course.services.CrudCargoService;
 import com.testeweb.course.services.CrudFuncionarioService;
+import com.testeweb.course.services.FuncionarioRelatorioDinamico;
 import com.testeweb.course.services.RelatorioService;
 
 @SpringBootApplication
@@ -20,13 +21,15 @@ public class SpringDataApplication implements CommandLineRunner {
 	private final CrudCargoService cargoService;
 	private final CrudFuncionarioService funcionarioService;
 	private final RelatorioService relatorioService;
+	private final FuncionarioRelatorioDinamico funcionarioRelatorioDinamico;
 	private Boolean system = true;
 	
 	//constructor
-	public SpringDataApplication(CrudCargoService cargoService,CrudFuncionarioService funcionarioService,RelatorioService relatorioService) {
+	public SpringDataApplication(CrudCargoService cargoService,CrudFuncionarioService funcionarioService,RelatorioService relatorioService,FuncionarioRelatorioDinamico funcionarioRelatorioDinamico) {
 		this.cargoService = cargoService;
 		this.funcionarioService = funcionarioService;
 		this.relatorioService = relatorioService;
+		this.funcionarioRelatorioDinamico = funcionarioRelatorioDinamico;
 	}
 	//rodar minha aplicação com minhas classes junto com springboot
 	public static void main(String[] args) {
@@ -45,6 +48,7 @@ public class SpringDataApplication implements CommandLineRunner {
 			System.out.println("1 - Cargo ");
 			System.out.println("2 - funcionario");
 			System.out.println("3 - relatorio");
+			System.out.println("3 - relatorio funcionario dinamico");
 			//variavel de comparação
 			Integer function = scanner.nextInt();
 			switch(function){
@@ -57,6 +61,9 @@ public class SpringDataApplication implements CommandLineRunner {
 				break;
 			case 3: 
 				relatorioService.iniciar();
+				break;
+			case 4 :
+				funcionarioRelatorioDinamico.iniciar(scanner);
 				break;
 			default:
 				System.out.println("Finalizando...");

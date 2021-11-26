@@ -3,13 +3,15 @@ package com.testeweb.course.repositories;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.testeweb.course.entities.Funcionario;
 import com.testeweb.course.entities.FuncionarioProjecao;
 //metodo de paginação -> para listar numeros desejados de arquivos
-public interface FuncionarioRepository extends  PagingAndSortingRepository<Funcionario, Integer>{
+public interface FuncionarioRepository extends  PagingAndSortingRepository<Funcionario, Integer>,
+JpaSpecificationExecutor<Funcionario>{
 	//listaFuncionario -> QueryCreate
 	List<Funcionario> findByNome(String nome);
 	
